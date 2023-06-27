@@ -56,7 +56,8 @@ public class SerpAPIWrapper {
     }
 
     public SerpAPIWrapper(Map<String, Object> kwargs) {
-        this.serpapiApiKey = Utils.getFromDictOrEnv(kwargs, "serpapi_api_key", "SERPAPI_API_KEY");
+        // this.serpapiApiKey = Utils.getFromDictOrEnv(kwargs, "serpapi_api_key", "26dda534a4e521d02b12c4fcb4092bce500a4fcab3a9ed3eabbf8709b099a615");
+        this.serpapiApiKey = "26dda534a4e521d02b12c4fcb4092bce500a4fcab3a9ed3eabbf8709b099a615";
         // Initialize with default values
         this.params = new HashMap<>();
         params.put("engine", "google");

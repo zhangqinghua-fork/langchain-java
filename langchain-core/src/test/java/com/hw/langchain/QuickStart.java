@@ -26,7 +26,6 @@ import com.hw.langchain.chains.sql.database.base.SQLDatabaseSequentialChain;
 import com.hw.langchain.llms.openai.OpenAI;
 import com.hw.langchain.prompts.prompt.PromptTemplate;
 import com.hw.langchain.sql.database.SQLDatabase;
-
 import lombok.experimental.UtilityClass;
 
 import java.util.List;
@@ -47,9 +46,11 @@ public class QuickStart {
 
     private void llm() {
         var llm = OpenAI.builder()
-                .temperature(0.9f)
-                .build()
-                .init();
+                        .openaiApiBase("https://openai.api2d.net/v1/")
+                        .openaiApiKey("fk196849-s7KtyNM3rhZ5d77hU75xvhKqPKKVxPw2|ck136-21604fc")
+                        .temperature(0.9f)
+                        .build()
+                        .init();
 
         String text = "What would be a good company name for a company that makes colorful socks?";
         System.out.println(llm.call(text));
@@ -57,19 +58,21 @@ public class QuickStart {
 
     private void promptTemplate() {
         var prompt = new PromptTemplate(List.of("product"),
-                "What is a good name for a company that makes {product}?");
+                                        "What is a good name for a company that makes {product}?");
 
         System.out.println(prompt.format(Map.of("product", "colorful socks")));
     }
 
     private void llmChain() {
         var llm = OpenAI.builder()
-                .temperature(0.9f)
-                .build()
-                .init();
+                        .openaiApiBase("https://openai.api2d.net/v1/")
+                        .openaiApiKey("fk196849-s7KtyNM3rhZ5d77hU75xvhKqPKKVxPw2|ck136-21604fc")
+                        .temperature(0.9f)
+                        .build()
+                        .init();
 
         var prompt = new PromptTemplate(List.of("product"),
-                "What is a good name for a company that makes {product}?");
+                                        "What is a good name for a company that makes {product}?");
 
         var chain = new LLMChain(llm, prompt);
         System.out.println(chain.run("colorful socks"));
@@ -79,9 +82,9 @@ public class QuickStart {
         var database = SQLDatabase.fromUri("jdbc:mysql://127.0.0.1:3306/demo", "root", "123456");
 
         var llm = OpenAI.builder()
-                .temperature(0)
-                .build()
-                .init();
+                        .temperature(0)
+                        .build()
+                        .init();
 
         var chain = SQLDatabaseChain.fromLLM(llm, database);
         System.out.println(chain.run("How many students are there?"));
@@ -91,9 +94,9 @@ public class QuickStart {
         var database = SQLDatabase.fromUri("jdbc:mysql://127.0.0.1:3306/demo", "root", "123456");
 
         var llm = OpenAI.builder()
-                .temperature(0)
-                .build()
-                .init();
+                        .temperature(0)
+                        .build()
+                        .init();
 
         var chain = SQLDatabaseSequentialChain.fromLLM(llm, database);
         System.out.println(chain.run("How many students are there?"));
@@ -101,9 +104,11 @@ public class QuickStart {
 
     private void agent() {
         var llm = OpenAI.builder()
-                .temperature(0)
-                .build()
-                .init();
+                        .openaiApiBase("https://openai.api2d.net/v1/")
+                        .openaiApiKey("fk196849-s7KtyNM3rhZ5d77hU75xvhKqPKKVxPw2|ck136-21604fc")
+                        .temperature(0)
+                        .build()
+                        .init();
 
         // load some tools to use.
         var tools = loadTools(List.of("serpapi", "llm-math"), llm);
@@ -112,16 +117,15 @@ public class QuickStart {
         var agent = initializeAgent(tools, llm, AgentType.ZERO_SHOT_REACT_DESCRIPTION);
 
         // let's test it out!
-        String text =
-                "What was the high temperature in SF yesterday in Fahrenheit? What is that number raised to the .023 power?";
+        String text = "告诉我明天深圳和广州的天气预报";
         System.out.println(agent.run(text));
     }
 
     private void memory() {
         var llm = OpenAI.builder()
-                .temperature(0)
-                .build()
-                .init();
+                        .temperature(0)
+                        .build()
+                        .init();
 
         var conversation = new ConversationChain(llm);
 
@@ -133,12 +137,12 @@ public class QuickStart {
     }
 
     public static void main(String[] args) {
-        llm();
-        promptTemplate();
-        llmChain();
-        sqlChain();
-        sqlSequentialChain();
+        // llm();
+        // promptTemplate();
+        // llmChain();
+        // sqlChain();
+        // sqlSequentialChain();
         agent();
-        memory();
+        // memory();
     }
 }

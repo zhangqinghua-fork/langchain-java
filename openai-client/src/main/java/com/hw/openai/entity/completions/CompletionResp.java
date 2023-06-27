@@ -40,4 +40,9 @@ public class CompletionResp {
     private List<Choice> choices;
 
     private Usage usage;
+
+    /**
+     * 不知道是什么东西
+     */
+    private String cache;
 }

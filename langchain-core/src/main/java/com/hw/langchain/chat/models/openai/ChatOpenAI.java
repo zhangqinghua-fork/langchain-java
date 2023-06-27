@@ -144,7 +144,10 @@ public class ChatOpenAI extends BaseChatModel {
                 .reduce((a1, a2) -> new Usage(
                         a1.getPromptTokens() + a2.getPromptTokens(),
                         a1.getCompletionTokens() + a2.getCompletionTokens(),
-                        a1.getTotalTokens() + a2.getTotalTokens()))
+                        a1.getTotalTokens() + a2.getTotalTokens(),
+                        a1.getPreTotal() + a2.getPreTotal(),
+                        a1.getAdjustTotal() + a2.getAdjustTotal(),
+                        a1.getFinalTotal() + a2.getFinalTotal()))
                 .orElse(new Usage());
 
         return Map.of("token_usage", usage, "model_name", this.model);

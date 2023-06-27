@@ -41,4 +41,13 @@ public class Usage {
 
     @JsonProperty("total_tokens")
     private Long totalTokens;
+
+    @JsonProperty("pre_total")
+    private Long preTotal;
+
+    @JsonProperty("adjust_total")
+    private Long adjustTotal;
+
+    @JsonProperty("final_total")
+    private Long finalTotal;
 }
